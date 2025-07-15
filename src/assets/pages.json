@@ -1,0 +1,92 @@
+{
+  "pages": [
+    {
+      "elements": [
+        {
+          "type": "text",
+          "id": "title",
+          "content": "Ваше Имя",
+          "styles": {
+            "font-size": "24px",
+            "color": "#333",
+            "margin-bottom": "20px"
+          }
+        },
+        {
+          "type": "input",
+          "id": "name",
+          "placeholder": "Имя",
+          "value": "Альберт",
+          "styles": {
+            "padding": "8px",
+            "border": "1px solid #ccc",
+            "border-radius": "4px",
+            "margin-right": "10px"
+          }
+        },
+        {
+          "type": "button",
+          "id": "submit",
+          "text": "Сохранить изменения",
+          "styles": {
+            "background-color": "#2196F3",
+            "color": "white",
+            "padding": "10px 15px",
+            "border": "none",
+            "border-radius": "4px"
+          }
+        }
+      ]
+    },
+    {
+      "elements": [
+        {
+          "type": "text",
+          "id": "title",
+          "content": "Введите почту и пароль",
+          "styles": {
+            "font-size": "24px",
+            "color": "#333",
+            "margin-bottom": "20px"
+          }
+        },
+        {
+          "type": "input",
+          "id": "email",
+          "placeholder": "Введите почту",
+          "value": "",
+          "styles": {
+            "padding": "8px",
+            "border": "1px solid #ccc",
+            "border-radius": "4px",
+            "margin": "0 10px 0 0"
+          }
+        },
+        {
+          "type": "input",
+          "id": "password",
+          "placeholder": "Введите пароль",
+          "value": "",
+          "styles": {
+            "padding": "8px",
+            "border": "1px solid #ccc",
+            "border-radius": "4px",
+            "margin": "0 10px 0 0"
+          }
+        },
+        {
+          "type": "button",
+          "id": "submit",
+          "text": "Войти",
+          "styles": {
+            "background-color": "#4CAF50",
+            "color": "white",
+            "padding": "10px 15px",
+            "border": "none",
+            "border-radius": "4px"
+          }
+        }
+      ]
+    }
+  ]
+}
