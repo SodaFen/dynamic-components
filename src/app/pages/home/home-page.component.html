@@ -1,0 +1,15 @@
+<div class="main-container">
+  <div class="main-container_content">
+    <div class="buttons">
+      <button (click)="reset()">Сброс данных</button>
+      <button (click)="changePage(0)">Страница 1</button>
+      <button (click)="changePage(1)">Страница 2</button>
+    </div>
+    <div>
+      <app-dynamic-wrapper
+        [config]="currentPageConfig"
+        #wrapper
+      ></app-dynamic-wrapper>
+    </div>
+  </div>
+</div>
