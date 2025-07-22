@@ -1,59 +1,60 @@
-# TestTask
+# Angular Dynamic Forms Builder
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.0.
+Система динамического построения форм в Angular на основе JSON-конфигураций с поддержкой реактивных форм.
 
-## Development server
+## Особенности
 
-To start a local development server, run:
+- Динамический рендеринг форм из JSON
+- Поддержка реактивных форм
+- Адаптивный layout (горизонтальный/вертикальный)
+- Кастомизация компонентов через конфиг
 
-```bash
-ng serve
+## JSON-конфигурация 
+
+Базовая структура
+
+```json
+{
+  "title": string, //Название формы
+  "direction": string, //Выбор направления компоновки
+  "elements": [], // Элементы формы
+  "styles": {} // CSS-стили
+}
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Реализованные элементы
 
-## Code scaffolding
+| Тип    | Описание       | Пример конфигурации                                          |
+|--------|----------------|--------------------------------------------------------------|
+| text   | Текстовое поле | [Перейти к Text Конфигурации](#пример-text-конфигурации)     |
+| input  | Текст          | [Перейти к Input Конфигурации](#пример-input-конфигурации)   |
+| button | Кнопка         | [Перейти к Button Конфигурации](#пример-button-конфигурации) |
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+### Пример Text конфигурации
+```json
+{
+  "type": "text",
+  "id": "enterData",
+  "content": "Введите указанные данные"
+}
+```
+### Пример Input конфигурации
+```json
+{
+  "type": "input",
+  "id": "userPassword",
+  "inputType": "password",
+  "placeholder": "Введите пароль"
+}
+```
+### Пример Button конфигурации
+```json
+{
+  "type": "button",
+  "id": "enter",
+  "text": "Войти",
+  "event": "submit"
+}
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+[Пример конфигурации двух страниц](./src/assets/pages.json)
