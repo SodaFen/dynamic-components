@@ -1,15 +1,32 @@
-<div class="main-container">
-  <div class="main-container_content">
-    <div class="buttons">
-      <button (click)="reset()">Сброс данных</button>
-      <button (click)="changePage(0)">Страница 1</button>
-      <button (click)="changePage(1)">Страница 2</button>
-    </div>
-    <div>
-      <app-dynamic-wrapper
-        [config]="currentPageConfig"
-        #wrapper
-      ></app-dynamic-wrapper>
-    </div>
+<form [formGroup]="form" class="form-container">
+  <div
+    [style]="config.styles"
+    [style.flex-direction]="isHorizontal ? 'row' : 'column'"
+  >
+    @if (config.title) {
+      <h4>
+        {{ config.title }}
+      </h4>
+    }
+    @for (element of config.elements; track element.id) {
+      @switch (element.type) {
+        @case ("input") {
+          <app-dynamic-input
+            [config]="getInputConfig(element)"
+            [formControlName]="element.id"
+          ></app-dynamic-input>
+        }
+        @case ("button") {
+          <app-dynamic-button
+            [config]="getButtonConfig(element)"
+            (event)="handleAction(element)"
+          >
+          </app-dynamic-button>
+        }
+        @case ("text") {
+          <app-dynamic-text [config]="getTextConfig(element)" />
+        }
+      }
+    }
   </div>
-</div>
+</form>

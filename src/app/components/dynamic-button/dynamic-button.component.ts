@@ -1,21 +1,31 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DynamicComponent } from '../../models/dynamic-component.model';
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  HostListener,
+  Input,
+  Output,
+} from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { ButtonConfig } from '../../models/page-config.model';
 
 @UntilDestroy()
 @Component({
   selector: 'app-dynamic-button',
-  templateUrl: './dynamic-button.component.html',
+  template: `{{ config.text }}`,
   standalone: true,
 })
-export class DynamicButtonComponent implements DynamicComponent {
-  @Input() config: any;
-  @Output() event = new EventEmitter();
+export class DynamicButtonComponent {
+  @Input({ required: true }) config!: ButtonConfig;
+  @Output() event = new EventEmitter<string>();
 
-  handleClick() {
-    this.event.emit({
-      type: 'click',
-      id: this.config.id,
-    });
+  @HostBinding('style')
+  get styles() {
+    return this.config.styles;
+  }
+
+  @HostListener('click')
+  onClick() {
+    this.event.emit(this.config.event);
   }
 }

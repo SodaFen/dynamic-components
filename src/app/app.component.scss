@@ -1,0 +1,17 @@
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+
+  .main-container_content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+  }
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}

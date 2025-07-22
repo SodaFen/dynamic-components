@@ -1,23 +1,70 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DynamicComponent } from '../../models/dynamic-component.model';
+import { Component, forwardRef, HostBinding, Input } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { InputConfig } from '../../models/page-config.model';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
 @UntilDestroy()
 @Component({
   selector: 'app-dynamic-input',
-  templateUrl: './dynamic-input.component.html',
+  template: `
+    <input
+      [type]="config.inputType || 'text'"
+      [placeholder]="config.placeholder"
+      [value]="value"
+      (input)="onInput($event)"
+    />
+  `,
   standalone: true,
+  imports: [ReactiveFormsModule],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DynamicInputComponent),
+      multi: true,
+    },
+  ],
 })
-export class DynamicInputComponent implements DynamicComponent {
-  @Input() config: any;
-  @Output() event = new EventEmitter();
+export class DynamicInputComponent implements ControlValueAccessor {
+  @Input({ required: true }) config!: InputConfig;
 
-  onInput(event: any) {
-    this.config.value = event.target.value;
-    this.event.emit({
-      type: 'input',
-      value: event.target.value,
-      id: this.config.id,
-    });
+  value: any;
+  onChange: any = () => {};
+  onTouched: any = () => {};
+
+  @HostBinding('style')
+  get styles() {
+    return this.config.styles;
+  }
+
+  @HostBinding('type')
+  get inputType() {
+    return this.config.inputType || 'text';
+  }
+
+  @HostBinding('placeholder')
+  get placeholder() {
+    return this.config.placeholder;
+  }
+
+  writeValue(value: any): void {
+    this.value = value;
+  }
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  onInput(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.onChange(value);
   }
 }
